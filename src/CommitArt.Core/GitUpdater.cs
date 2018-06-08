@@ -15,10 +15,6 @@ namespace CommitArt.Core
         private string password = "";
         private string email = "";
         private string gitPath = "";
-        //private GetFile
-        //private UpdateFileText
-        //private Commit File
-        //private Push update
 
         public GitUpdater(string remoteGitPath, string gitusername, string gitpassword, string gitemail)
         {
@@ -26,13 +22,6 @@ namespace CommitArt.Core
             username = gitusername;
             password = gitpassword;
             email = gitemail;
-        }
-
-        public void SyncLocalRepo()
-        {
-            CloneRepo();
-            FetchRepoFiles(repoPath);
-            Pull();
         }
 
         public void CloneRepo()
@@ -62,7 +51,7 @@ namespace CommitArt.Core
             Console.WriteLine(logMessage);
         }
 
-        public void Pull()
+        private void Pull()
         {
             using (var repo = new Repository(repoPath))
             {
@@ -79,31 +68,55 @@ namespace CommitArt.Core
             }
         }
 
-        public string GetDataFilePath()
+        private string GetDataFilePath()
         {
-            string[] paths = new string[] { Directory.GetCurrentDirectory(), repoPath, "data", "data.txt" };
+            string[] paths = new string[] { repoPath, "data", "data.txt" };
             string dataFilePath = Path.Combine(paths);
             return dataFilePath;
         }
 
-        public void AppendLine()
+        public void UpdateLocalDataFile()
         {
-            string text = File.ReadAllText(GetDataFilePath());
-            text = text + CreateRandomString() + Environment.NewLine;
-            File.WriteAllText(GetDataFilePath(), text);
+            GetDataFilePath().AppendLineToDataFile();
         }
 
-        private string CreateRandomString()
+        public void PushChangesToGithub()
         {
-            //TODO: Get creative
-            Random random = new Random();
-            var builder = new StringBuilder(100);
-            for (int i = 0; i < 100; i++)
-            {
-                builder.Append((char)random.Next(33, 125));
-            }
+            Commit();
+            Push();
+        }
 
-            return builder.ToString();
+        private void Commit()
+        {
+            using (var repo = new Repository(repoPath))
+            {
+
+                // Stage the file
+                Commands.Stage(repo, "data/data.txt");
+
+                // Create the committer's signature and commit
+                Signature author = new Signature("John", email, DateTime.Now);
+                Signature committer = author;
+
+                // Commit to the repository
+                Commit commit = repo.Commit("Data file update", author, committer);
+            }
+        }
+
+        private void Push()
+        {
+            using (var repo = new Repository(repoPath))
+            {
+                LibGit2Sharp.PushOptions options = new LibGit2Sharp.PushOptions();
+                options.CredentialsProvider = new CredentialsHandler(
+                    (url, usernameFromUrl, types) =>
+                        new UsernamePasswordCredentials()
+                        {
+                            Username = username,
+                            Password = password
+                        });
+                repo.Network.Push(repo.Branches["master"], options);
+            }
         }
     }
 }
