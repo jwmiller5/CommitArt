@@ -3,18 +3,18 @@ using CommitArt.Core;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Host;
 
-namespace CommitArt
+namespace FunctionApp1
 {
     public static class Function1
     {
-        [FunctionName("UpdateGithubRepo")]
+        [FunctionName("Function1")]
         public static void Run([TimerTrigger("0 */2 * * * *")]TimerInfo myTimer, TraceWriter log)
         {
             try
             {
                 log.Info($"{DateTime.Now}: Setting up git");
                 var updater = AppSettingsInitGitUpdater();
-                log.Info($"{DateTime.Now}: Getting git repo");
+                log.Info($"{DateTime.Now}: Getting git repo {updater.EchoStatus}");
                 updater.CloneRepo();
                 updater.UpdateLocalDataFile();
                 log.Info($"{DateTime.Now}: Data File updated");

@@ -24,6 +24,11 @@ namespace CommitArt.Core
             email = gitemail;
         }
 
+        public string EchoStatus()
+        {
+            return $"{gitPath} setup for {username}:{email}";
+        }
+
         public void CloneRepo()
         {
             if (!Directory.Exists(repoPath))
@@ -89,9 +94,7 @@ namespace CommitArt.Core
         private void Commit()
         {
             using (var repo = new Repository(repoPath))
-            {
-
-                // Stage the file
+            {                // Stage the file
                 Commands.Stage(repo, "data/data.txt");
 
                 // Create the committer's signature and commit
@@ -99,7 +102,7 @@ namespace CommitArt.Core
                 Signature committer = author;
 
                 // Commit to the repository
-                Commit commit = repo.Commit(CommitArtDataFile.CreateRandomWords(), author, committer);
+                Commit commit = repo.Commit("Data file update", author, committer);
             }
         }
 

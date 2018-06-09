@@ -17,12 +17,18 @@ namespace CommitArt.Cmd
             {
                 updater = ConsoleInitGitUpdater();
             }
+
+            if (!RandomChance())
+            {
+                Console.WriteLine("No activity");
+                return;
+            }
+
             updater.CloneRepo();
             updater.UpdateLocalDataFile();
             Console.WriteLine("Data file updated");
             updater.PushChangesToGithub();
             Console.WriteLine("data file committed to github");
-            Console.ReadLine();
         }
 
         private static Core.GitUpdater ConsoleInitGitUpdater()
@@ -51,6 +57,14 @@ namespace CommitArt.Cmd
         {
             Core.GitUpdater updater = new Core.GitUpdater(args[0], args[1], args[2], args[3]);
             return updater;
+        }
+
+        private static bool RandomChance()
+        {
+            // 1 in 10 chance
+            Random rnd = new Random();
+            int target = 5;
+            return rnd.Next(10) == target;
         }
     }
 }

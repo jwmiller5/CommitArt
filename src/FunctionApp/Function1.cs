@@ -3,11 +3,11 @@ using CommitArt.Core;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Host;
 
-namespace CommitArt
+namespace FunctionApp
 {
     public static class Function1
     {
-        [FunctionName("UpdateGithubRepo")]
+        [FunctionName("Function1")]
         public static void Run([TimerTrigger("0 */2 * * * *")]TimerInfo myTimer, TraceWriter log)
         {
             try

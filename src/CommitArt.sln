@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CommitArt.Cmd", "CommitArt.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CommitArt.Core", "CommitArt.Core\CommitArt.Core.csproj", "{38E5F99F-0594-4145-A8ED-47AF496EC939}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CommitArtFunction", "CommitArt.Function\CommitArtFunction.csproj", "{647B6C4B-A5B9-468C-A357-A2165DEF76E1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FunctionApp", "FunctionApp\FunctionApp.csproj", "{A033A45C-3FAF-43E0-85F0-706D089CD23F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +23,10 @@ Global
 		{38E5F99F-0594-4145-A8ED-47AF496EC939}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{38E5F99F-0594-4145-A8ED-47AF496EC939}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{38E5F99F-0594-4145-A8ED-47AF496EC939}.Release|Any CPU.Build.0 = Release|Any CPU
-		{647B6C4B-A5B9-468C-A357-A2165DEF76E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{647B6C4B-A5B9-468C-A357-A2165DEF76E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{647B6C4B-A5B9-468C-A357-A2165DEF76E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{647B6C4B-A5B9-468C-A357-A2165DEF76E1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A033A45C-3FAF-43E0-85F0-706D089CD23F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A033A45C-3FAF-43E0-85F0-706D089CD23F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A033A45C-3FAF-43E0-85F0-706D089CD23F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A033A45C-3FAF-43E0-85F0-706D089CD23F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
